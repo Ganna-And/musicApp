@@ -1,12 +1,8 @@
 import React from "react";
 import { Stack, Text, Flex, Icon } from "@chakra-ui/react";
 import { FaMinusSquare, FaPlusSquare } from "react-icons/fa";
-import { useState } from "react";
-
 const Track = ({ track, onAdd, onRemove , isRemoval}) => {
  
-
-
   return (
     <Flex
   
@@ -46,7 +42,6 @@ const Track = ({ track, onAdd, onRemove , isRemoval}) => {
     cursor="pointer" 
     _hover={{ opacity: "0.5" }}
     onClick={()=>onRemove(track)}
-    isRemoval
     />
     )}
     </Flex>

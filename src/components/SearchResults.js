@@ -1,10 +1,12 @@
 import React from 'react'
 import { Stack, Text } from '@chakra-ui/react'
 import TracksList from './TracksList';
-import { useState } from 'react';
+import { useSelector} from 'react-redux';
+import { selectSearchResults } from './TrackListSlice';
 
-const SearchResults = ({ searchResults, onAdd}) => {
- 
+const SearchResults = ({ searchResults}) => {
+ const results = useSelector(selectSearchResults);
+
   return (
     <Stack 
     display="flex"
@@ -18,7 +20,7 @@ const SearchResults = ({ searchResults, onAdd}) => {
 
      </Text>
       
-      <TracksList tracks={searchResults} onAdd={onAdd} />
+      <TracksList tracks={results} />
       </Stack>  
       
   )

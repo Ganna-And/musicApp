@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createSelector } from "@reduxjs/toolkit";
 
 const trackListSlice = createSlice({
   name: "tracks",
@@ -19,13 +19,20 @@ const trackListSlice = createSlice({
         state.playListTracks.push(action.payload);
     },
     removeTrack:(state, action)=>{
-        state.playListTracks.filter((savedTrack)=> savedTrack.id !== action.payload.id);
+        state.playListTracks = state.playListTracks.filter((savedTrack)=> savedTrack.id !== action.payload.id);
     }
   }
 });
 
 
 export const {addTrack, removeTrack} = trackListSlice.actions;
-export const selectPlaylistTracks = trackListSlice.state.playListTracks;
-export const selectSearchResults = trackListSlice.state.searchResults;
+export const selectPlaylistTracks = createSelector(
+    state => state.tracks.playListTracks,
+    playListTracks => playListTracks
+  );
+  
+  export const selectSearchResults = createSelector(
+    state => state.tracks.searchResults,
+    searchResults => searchResults
+  );
 export default trackListSlice.reducer

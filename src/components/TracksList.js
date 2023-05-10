@@ -1,8 +1,19 @@
 import { Flex } from "@chakra-ui/react";
 import React from "react";
 import Track from "./Track";
-const TracksList = ({tracks, onAdd, onRemove, isRemoval}) => {
+import { useDispatch } from "react-redux/es/exports";
+import { addTrack, removeTrack } from "./TrackListSlice";
+
+const TracksList = ({tracks, isRemoval}) => {
   
+    const dispatch = useDispatch();
+
+    const onAdd =(track)=>{
+        dispatch(addTrack(track));
+         };
+    const onRemove = (track)=>{
+        dispatch(removeTrack(track))
+    }     
   
     return (
        <Flex direction="column" mr={4} ml={4} mb={1}>
