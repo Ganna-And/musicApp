@@ -11,7 +11,7 @@ const PlayList = () => {
  const dispatch = useDispatch();
 
   const playlist = useSelector(selectPlaylistTracks);
-  
+  const trackUris = playlist.map(track=> track.uri);
 
   const onSavePlaylist =({name, trackUris})=>{
     dispatch(onSaveSpotify(name, trackUris));
@@ -25,7 +25,7 @@ const onNameChange=(e)=>{
 };
 
 const handleSpotifyClick=()=>{
-onSavePlaylist(name, playlist.map(track=> track.uri))
+onSavePlaylist({name, trackUris})
 }
 
 
