@@ -1,22 +1,25 @@
 import React, { useState } from 'react';
+import { fetchSearchResults } from './TrackListSlice';
 
 import { Input, InputLeftElement, InputGroup, Icon,  } from '@chakra-ui/react';
 import { FaSearch} from 'react-icons/fa';
-
+import { useDispatch } from 'react-redux';
 
 
 const SearchBar = () => {
+  const dispatch = useDispatch();
+  const[term, setTerm] = useState('');
 
-  const[query, setQuery] = useState('');
-
-  const handleQueryChange = (e)=>{
-    setQuery(e.target.value);
+  const handleTermChange = (e)=>{
+    setTerm(e.target.value);
   };
  
-  const handleSearch = (query)=>{
-    console.log(query)
+  const handleSearch = (term)=>{
+    dispatch(fetchSearchResults(term))
   }
  
+
+
   return (
     <InputGroup
     m={4}
@@ -32,11 +35,11 @@ const SearchBar = () => {
     placeholder='search'
     _placeholder={{color: 'white'}} 
     color='white'
-    value={query}
-    onChange={handleQueryChange}
+    value={term}
+    onChange={handleTermChange}
     onKeyDown={(e)=>{
       if(e.key ==='Enter'){
-        handleSearch(query)
+        handleSearch(term)
       }
     }}
     

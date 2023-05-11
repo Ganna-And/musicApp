@@ -1,11 +1,16 @@
 import React from 'react'
 import { Stack, Text } from '@chakra-ui/react'
 import TracksList from './TracksList';
-import { useSelector} from 'react-redux';
+import {  useSelector} from 'react-redux';
 import { selectSearchResults } from './TrackListSlice';
 
-const SearchResults = ({ searchResults}) => {
+
+const SearchResults = () => {
  const results = useSelector(selectSearchResults);
+ 
+
+ 
+
 
   return (
     <Stack 

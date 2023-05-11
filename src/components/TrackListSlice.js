@@ -1,38 +1,53 @@
-import { createSlice, createSelector } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
+import Spotify from "../utils/Spotify";
 
 const trackListSlice = createSlice({
   name: "tracks",
   initialState: {
-    playListTracks: [
-      { id: 4, title: "title1", artist: "artist1", album: "bilo6" },
-      { id: 5, title: "title2", artist: "artist2", album: "bilo5" },
-      { id: 6, title: "title3", artist: "artist3", album: "bilo4" },
-    ],
-    searchResults: [
-      { id: 1, title: "haliVali", artist: "Paratruper", album: "bilo super" },
-      { id: 2, title: "Moi goda", artist: "Bogdan", album: "bilo bogatstvo" },
-      { id: 3, title: "haliVali", artist: "Paratruper", album: "bilo super" },
-    ]
+    playListTracks: [],
+    searchResults: [],
   },
-  reducers:{
-    addTrack:(state, action)=>{
-        state.playListTracks.push(action.payload);
+  reducers: {
+    updateResults: (state, action) => {
+      state.searchResults = action.payload;
     },
-    removeTrack:(state, action)=>{
-        state.playListTracks = state.playListTracks.filter((savedTrack)=> savedTrack.id !== action.payload.id);
-    }
-  }
+    addTrack: (state, action) => {
+      state.playListTracks.push(action.payload);
+    },
+    removeTrack: (state, action) => {
+      state.playListTracks = state.playListTracks.filter(
+        (savedTrack) => savedTrack.id !== action.payload.id
+      );
+    },
+    clearPlaylist: (state) => {
+      state.playListTracks = [];
+    },
+  },
 });
 
+export const { addTrack, removeTrack, updateResults, clearPlaylist } =
+  trackListSlice.actions;
 
-export const {addTrack, removeTrack} = trackListSlice.actions;
-export const selectPlaylistTracks = createSelector(
-    state => state.tracks.playListTracks,
-    playListTracks => playListTracks
-  );
-  
-  export const selectSearchResults = createSelector(
-    state => state.tracks.searchResults,
-    searchResults => searchResults
-  );
-export default trackListSlice.reducer
+export const fetchSearchResults = (term) => async (dispatch) => {
+  try {
+    const searchResults = await Spotify.search(term);
+    dispatch(updateResults(searchResults));
+  } catch (error) {
+    console.log("fetchSearchResults error", error);
+  }
+};
+
+export const onSaveSpotify = (name, trackUris) => async (dispatch) => {
+  try {
+    const playlistSpotify = await Spotify.savePlayList(name, trackUris);
+    dispatch(clearPlaylist(playlistSpotify));
+  } catch (error) {
+    console.log("savePlayList error", error);
+  }
+};
+
+export const selectPlaylistTracks = (state) => state.tracks.playListTracks;
+
+export const selectSearchResults = (state) => state.tracks.searchResults;
+
+export default trackListSlice.reducer;
