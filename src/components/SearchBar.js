@@ -29,12 +29,13 @@ const SearchBar = () => {
      >
     <InputLeftElement
       pointerEvents='none'
-      children={<Icon as={FaSearch} color='gray.300' />}
+      children={<Icon as={FaSearch} color='black' />}
     />
     <Input type='search' 
     placeholder='search'
-    _placeholder={{color: 'white'}} 
-    color='white'
+    _placeholder={{color: 'rgba(0,0,0,0.8)'}} 
+    color='rgba(0,0,0,0.8)'
+    boxShadow='2px 2px 4px black'
     value={term}
     onChange={handleTermChange}
     onKeyDown={(e)=>{

@@ -16,7 +16,9 @@ const TracksList = ({tracks, isRemoval}) => {
     }     
   
     return (
-       <Flex direction="column" mr={4} ml={4} mb={1}>
+       <Flex direction="column" 
+       width='100%'
+        m={{sm:'0', md:'0', lg:'1%'}}>
             {tracks.map(track=>(
                 <Track
                 key={track.id}

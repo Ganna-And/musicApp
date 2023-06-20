@@ -1,5 +1,5 @@
 import React from 'react'
-import { Stack, Text } from '@chakra-ui/react'
+import {Flex, Text } from '@chakra-ui/react'
 import TracksList from './TracksList';
 import {  useSelector} from 'react-redux';
 import { selectSearchResults } from './TrackListSlice';
@@ -11,22 +11,19 @@ const SearchResults = () => {
 
  
 
-
   return (
-    <Stack 
+    <Flex 
+    flexDirection='column'
     display="flex"
-    width={{base: '80%',  md:'70%'} }
-    height='100vh'
-    mr={10}
-    ml={10}
-    bg='blackAlpha.400'>
-     <Text> 
+    width={['80%', '95%']}
+    ml={['2%', '2%', '5%']}
+    bg='rgba(0,0,0, 0.6)'>
+     <Text textAlign='center' mt='2%' > 
         Search Results
-
      </Text>
       
       <TracksList tracks={results} />
-      </Stack>  
+      </Flex>  
       
   )
 }

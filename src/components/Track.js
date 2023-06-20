@@ -5,8 +5,11 @@ const Track = ({ track, onAdd, onRemove , isRemoval}) => {
  
   return (
     <Flex
-  
-     border="1px solid" borderRadius={4} mr={4} ml={4} mb={2}
+     border="1px solid"
+      borderRadius={4} 
+      mr={4} 
+      ml={4}
+      mb={2}
      >
       <Stack 
       width='100%'

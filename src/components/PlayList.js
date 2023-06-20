@@ -3,7 +3,7 @@ import TracksList from './TracksList';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Button, Input, Stack,  } from '@chakra-ui/react';
+import { Button, Input, Flex } from '@chakra-ui/react';
 import { clearPlaylist,onSaveSpotify, selectPlaylistTracks } from './TrackListSlice';
 
 
@@ -31,25 +31,33 @@ onSavePlaylist({name, trackUris})
 
  
   return (
-    <Stack
-    width={{base: '90%',  md:'70%'} }
-    height='50vh'
-    
+    <Flex
+    flexDirection='column'
+    alignItems='center'
+    width={['100%', '95%','100%']}
     bg='blackAlpha.400'
-    mr={10}
-    ml={10}>
-    <Input fontSize='17pt' type='text'  onChange={onNameChange} placeholder='Playlist Name'/>
-    <Stack width='100%'>
+    mr={['2%', '2%', '5%']}
+    ml='1%'
+    bgColor='rgba(0,0,0,0.6)'>
+    <Input fontSize='17pt'
+    width='80%' 
+    mt='2%'
+    mb='2%'
+    type='text' 
+    onChange={onNameChange}
+    placeholder='Playlist Name'
+    _placeholder={{color: 'white', fontSize:'17px', textAlign:'center'}}/>
     <TracksList  playlistName={name} tracks={playlist} isRemoval={true}/>
-    </Stack>
-    <Button bg='' 
+    <Button
+    bg='rgba(0,0,0, 0.5)' 
     border='2px solid'
+    width='80%'
     _hover={{opacity:'0.5'}}
     onClick={handleSpotifyClick}
     >
-        Save to spotify
+    Save to spotify
     </Button>
-    </Stack>
+    </Flex>
   )
 }
 

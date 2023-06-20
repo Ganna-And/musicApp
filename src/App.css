@@ -1,39 +1,19 @@
 
 
 
-.logo{
-  background-color: rgb(78, 23, 130);
-  text-align: center;
-  color: antiquewhite;
-  font-size: 2rem;
-  margin-bottom: 2rem;
-}
-.highlight{
-  color: rgb(31, 6, 54);
-}
-
-.App {
-  text-align: center;
-  background-color: #282c34;
-  background-image: url(../public/background_photo_desktop.jpg) ;
+.App{
+  background-image: url('https://fastly.picsum.photos/id/39/3456/2304.jpg?hmac=cc_VPxzydwTUbGEtpsDeo2NxCkeYQrhTLqw4TFo-dIg') ;
   background-size: cover;
   background-repeat: no-repeat;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: start;
   font-size: calc(10px + 2vmin);
   color: white;
+  min-height: 100vh;
+}
+.highlight{
+  color: rgb(31, 6, 54);
 }
 
-
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
