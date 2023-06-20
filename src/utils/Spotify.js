@@ -1,6 +1,6 @@
 let accessToken;
 let clientId = "43ca929e8f054debbd76d1a9c5a39f94";
-let redirect_URI = "https://music-app-delta-han.vercel.app/callback";
+let redirect_URI = "music-h1ccf7ln8-ganna-and.vercel.app/callback";
 
 const Spotify = {
   getAccessToken() {
