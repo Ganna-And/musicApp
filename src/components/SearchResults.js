@@ -4,9 +4,8 @@ import TracksList from "./TracksList";
 import { useSelector } from "react-redux";
 import { selectSearchResults } from "./TrackListSlice";
 
-const SearchResults = () => {
+const SearchResults = ({setIsPreviewOpen}) => {
   const results = useSelector(selectSearchResults);
-
   return (
     <Flex
       flexDirection="column"
@@ -18,8 +17,7 @@ const SearchResults = () => {
       <Text textAlign="center" mt="2%">
         Search Results
       </Text>
-
-      <TracksList tracks={results} />
+      <TracksList tracks={results} setIsPreviewOpen={setIsPreviewOpen}/* previews={previews} *//>
     </Flex>
   );
 };

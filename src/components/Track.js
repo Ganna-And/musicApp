@@ -1,7 +1,16 @@
 import React from "react";
 import { Stack, Text, Flex, Icon } from "@chakra-ui/react";
 import { FaMinusSquare, FaPlusSquare } from "react-icons/fa";
-const Track = ({ track, onAdd, onRemove , isRemoval}) => {
+import {MdOutlinePreview} from 'react-icons/md'
+
+const Track = ({ track, onAdd, onRemove , isRemoval, setIsPreviewOpen, onSelect}) => {
+ 
+  const handlePreviewClick = () => {
+    onSelect(track);
+    setIsPreviewOpen(true);
+    
+  };
+
  
   return (
     <Flex
@@ -15,7 +24,7 @@ const Track = ({ track, onAdd, onRemove , isRemoval}) => {
       width='100%'
       justify="start" >
       <Text align="start" ml={4} cursor="pointer" _hover={{ opacity: "0.5" }}>
-        {track.title}
+        {track.name}
       </Text>
       <Flex
       fontSize='10pt'>
@@ -35,19 +44,29 @@ const Track = ({ track, onAdd, onRemove , isRemoval}) => {
         </Text>
       </Flex>
     </Stack>
-    <Flex align='center' m={4}>
-    {!isRemoval ?(<Icon as={FaPlusSquare}
+
+   
+   
+    {!isRemoval ?(
+       <Flex align='center' m={4}>
+       <Icon as ={MdOutlinePreview} 
+       cursor="pointer" 
+       _hover={{ opacity: "0.5" }}
+       onClick={handlePreviewClick} />
+    <Icon as={FaPlusSquare}
     cursor="pointer" 
     _hover={{ opacity: "0.5" }}
     onClick={()=>onAdd(track)}
-    />) : (
+    />
+    </Flex>) : (
+      <Flex align='center' m={4}>
       <Icon as={FaMinusSquare}
     cursor="pointer" 
     _hover={{ opacity: "0.5" }}
     onClick={()=>onRemove(track)}
     />
-    )}
     </Flex>
+    )}
     </Flex>
   );
 };

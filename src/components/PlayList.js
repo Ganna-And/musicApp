@@ -2,33 +2,35 @@ import React from "react";
 import TracksList from "./TracksList";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import {FaEnvelope} from 'react-icons/fa';
+import './chakra/buttons.css'
 
 import { Button, Input, Flex } from "@chakra-ui/react";
 import {
-  clearPlaylist,
   onSaveSpotify,
   selectPlaylistTracks,
 } from "./TrackListSlice";
 
 const PlayList = () => {
   const dispatch = useDispatch();
-
   const playlist = useSelector(selectPlaylistTracks);
-  const trackUris = playlist.map((track) => track.uri);
-
-  const onSavePlaylist = ({ name, trackUris }) => {
-    dispatch(onSaveSpotify(name, trackUris));
-    dispatch(clearPlaylist());
-  };
+  console.log(playlist)
 
   const [name, setName] = useState("");
+  const [flying, setFlying] = useState(false);
+  const trackUris = playlist.map(track => `spotify:track:${track.id}`);
 
+console.log(trackUris)
   const onNameChange = (e) => {
     setName(e.target.value);
   };
 
-  const handleSpotifyClick = () => {
-    onSavePlaylist({ name, trackUris });
+  const handleSpotifyClick = (name,trackUris) => {
+    dispatch(onSaveSpotify(name, trackUris));
+    setFlying(true);
+    setTimeout(()=>{
+      setFlying(false)
+    },2000)
   };
 
   return (
@@ -57,10 +59,11 @@ const PlayList = () => {
         border="2px solid"
         width="80%"
         _hover={{ opacity: "0.5" }}
-        onClick={handleSpotifyClick}
+        onClick={()=>handleSpotifyClick(name, trackUris)}
       >
         Save to spotify
       </Button>
+      {flying ? <FaEnvelope color="white" opacity={1} className="envelope" /> : ''}
     </Flex>
   );
 };

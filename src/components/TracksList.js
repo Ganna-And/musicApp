@@ -2,9 +2,9 @@ import { Flex } from "@chakra-ui/react";
 import React from "react";
 import Track from "./Track";
 import { useDispatch } from "react-redux/es/exports";
-import { addTrack, removeTrack } from "./TrackListSlice";
+import { addTrack, removeTrack, onTrackPreview } from "./TrackListSlice";
 
-const TracksList = ({tracks, isRemoval}) => {
+const TracksList = ({tracks, isRemoval, setIsPreviewOpen}) => {
   
     const dispatch = useDispatch();
 
@@ -14,7 +14,11 @@ const TracksList = ({tracks, isRemoval}) => {
     const onRemove = (track)=>{
         dispatch(removeTrack(track))
     }     
-  
+    
+    const onSelect =(track)=>{
+        dispatch(onTrackPreview(track))
+    }
+
     return (
        <Flex direction="column" 
        width='100%'
@@ -26,6 +30,8 @@ const TracksList = ({tracks, isRemoval}) => {
                 onAdd={onAdd}
                 onRemove={onRemove}
                 isRemoval={isRemoval}
+                setIsPreviewOpen={setIsPreviewOpen}
+                onSelect={onSelect}
                  />
             ))}
             

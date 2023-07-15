@@ -6,6 +6,8 @@ const trackListSlice = createSlice({
   initialState: {
     playListTracks: [],
     searchResults: [],
+    trackPreview: null,
+    userPlaylists:[]
   },
   reducers: {
     updateResults: (state, action) => {
@@ -22,10 +24,20 @@ const trackListSlice = createSlice({
     clearPlaylist: (state) => {
       state.playListTracks = [];
     },
+
+    onTrackPreview: (state, action) => {
+      state.trackPreview = action.payload;
+      
   },
+
+  showPlaylist:(state, action)=>{
+    state.userPlaylists = action.payload;
+  }
+    
+}
 });
 
-export const { addTrack, removeTrack, updateResults, clearPlaylist } =
+export const { addTrack, removeTrack, updateResults, clearPlaylist,onTrackPreview, showPlaylist} =
   trackListSlice.actions;
 
 export const fetchSearchResults = (term) => async (dispatch) => {
@@ -37,17 +49,33 @@ export const fetchSearchResults = (term) => async (dispatch) => {
   }
 };
 
-export const onSaveSpotify = (name, trackUris) => async (dispatch) => {
+export const onSaveSpotify = (name,trackUris) => async (dispatch) => {
   try {
-    const playlistSpotify = await Spotify.savePlayList(name, trackUris);
-    dispatch(clearPlaylist(playlistSpotify));
+    const playlistSpotify = await Spotify.savePlaylist(name,trackUris);
+    console.log(playlistSpotify)
+    dispatch(clearPlaylist());
   } catch (error) {
     console.log("savePlayList error", error);
   }
 };
 
+export const fetchUserPlaylists =()=> async (dispatch)=>{
+  try {
+   const userPlaylists = await Spotify.getUserPlaylists(); 
+   dispatch(showPlaylist(userPlaylists))
+  } catch (error) {
+    console.log('Error in fetching your playlists', error.message)
+  }
+  
+  
+} 
+
 export const selectPlaylistTracks = (state) => state.tracks.playListTracks;
 
 export const selectSearchResults = (state) => state.tracks.searchResults;
+
+export const seletcTrackPreview = (state)=> state.tracks.trackPreview;
+
+export const selectUserPlaylist = (state) => state.tracks.userPlaylists;
 
 export default trackListSlice.reducer;

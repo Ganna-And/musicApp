@@ -1,0 +1,23 @@
+@keyframes flyup{
+    0%{
+        top: 0%;
+        opacity: 1;
+
+    }
+
+   
+    100%{
+        top:-100%;
+        opacity:0;
+    }
+}
+
+.envelope{
+    position:relative;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: flyup 4s linear;
+    opacity: 1;
+    width: 10%;
+}
