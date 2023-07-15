@@ -2,7 +2,7 @@
 
 
 const clientId = '43ca929e8f054debbd76d1a9c5a39f94'; // Insert client ID here.
-const redirectUri = 'http://localhost:3000/'; // Have to add this to your accepted Spotify redirect URIs on the Spotify API.
+const redirectUri = 'https://music-app-delta-han.vercel.app/'; // Have to add this to your accepted Spotify redirect URIs on the Spotify API.
 let accessToken;
 
 const Spotify = {
